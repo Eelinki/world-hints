@@ -1,5 +1,5 @@
 (function () {
-    const game = window.games.find(game => {
+    window.game = window.games.find(game => {
         return new Date(game.date).getDate() === new Date().getDate()
     });
     const guessForm = document.querySelector('.guess-form');
