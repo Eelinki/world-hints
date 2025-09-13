@@ -1,0 +1,209 @@
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    background: #111;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+.app {
+    max-width: 640px;
+    padding: 16px;
+}
+
+h1 {
+    margin: 0;
+}
+
+.guess-form {
+    display: flex;
+    gap: 12px;
+
+    input {
+        padding: 12px;
+        font-size: 1em;
+        border-radius: 0;
+        border: none;
+        font-weight: bold;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        background: #bfbfbf;
+
+        &:disabled {
+            background: #444444;
+        }
+    }
+
+    input[type="submit"] {
+        background: #49a149;
+        color: white;
+        cursor: pointer;
+
+        &:disabled {
+            background: #444444;
+        }
+    }
+
+    label {
+        flex-grow: 1;
+    }
+}
+
+.hints-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    li {
+        color: white;
+        background: #333333;
+        padding: 12px;
+
+        &:first-child {
+            background: #444444;
+        }
+    }
+}
+
+.guesses-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    li {
+        color: white;
+        padding: 12px;
+
+        &.correct {
+            background: #49a149;
+            font-weight: bold;
+        }
+
+        &.wrong {
+            background: #911c1c;
+        }
+    }
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .buttons {
+        display: flex;
+        gap: 12px;
+
+        button {
+            font-size: 24px;
+        }
+    }
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #444444;
+}
+
+a {
+    color: inherit;
+}
+
+button.button {
+    padding: 12px;
+    font-size: 1em;
+    border-radius: 0;
+    border: none;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+dialog[open] {
+    animation: fade-in 0.7s ease-out;
+}
+
+dialog::backdrop {
+    display: none;
+}
+
+button.square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1em;
+    height: 1em;
+    font-size: 32px;
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+#settings {
+    button.reset {
+        background: #911c1c;
+    }
+}
+
+dialog {
+    border: none;
+    width: 100%;
+    max-width: 640px;
+    padding: 16px;
+    background: #111111;
+    color: white;
+    position: relative;
+    box-shadow: 0 0 0 100vmax #111111;
+
+    button.close-modal {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 16px;
+    }
+
+    button.share {
+        background: #49a149;
+    }
+
+    span.copied {
+        margin-left: 12px;
+        color: #cccccc;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+        display: none;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        display: block;
+    }
+}

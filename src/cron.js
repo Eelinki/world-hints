@@ -30,7 +30,7 @@ const client = new OpenAI({
     apiKey: process.env['OPENAI_API_KEY'],
 });
 
-const prompt = `Come up with 6 random hints about ${randomCountryName}, ordered from very hard to easy. Do not reveal the country name or any dead giveaways.`;
+const prompt = `Come up with 6 random hints about ${randomCountryName}, ordered from very hard (6) to easy (1). Do not reveal the country name or any dead giveaways.`;
 
 const Hint = z.object({
     difficulty: z.number(),
