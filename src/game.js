@@ -64,7 +64,7 @@ export default class Game {
                 </dialog>
                 <div class="app">
                     <header>
-                        <h1>World Hints #${games[0].id}</h1>
+                        <h1>World Hints #<span class="game-id"></span></h1>
                         <div class="buttons">
                             <button class="show-settings square" data-dialog="settings">⚙</button>
                             <button class="show-info square" data-dialog="info">?</button>
