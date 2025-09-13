@@ -10,10 +10,13 @@ const db = new Database('worldhints.db');
 
 // select today's game
 const today = db.prepare("SELECT id FROM games WHERE date = date('now')").get();
+const tomorrow = db.prepare("SELECT id FROM games WHERE date = date('now', '+1 day')").get();
 
 if (today) {
-    // today's game already exists
-    process.exit(0);
+    // today's and tomorrow's game already exists
+    if (tomorrow) {
+        process.exit(0);
+    }
 }
 
 // create new game
@@ -21,7 +24,12 @@ const countryCodes = Array.from(countries.getCodeList());
 const randomCountryCode = countryCodes[Math.floor(Math.random() * countryCodes.length)];
 const randomCountryName = countries.getName(randomCountryCode);
 
-const insert = db.prepare("INSERT INTO games (date, country) VALUES (date('now'), :country)");
+let insert;
+if (!today) {
+    insert = db.prepare("INSERT INTO games (date, country) VALUES (date('now'), :country)");
+} else {
+    insert = db.prepare("INSERT INTO games (date, country) VALUES (date('now', '+1 day'), :country)");
+}
 const gameId = insert.run({
     country: randomCountryCode
 }).lastInsertRowid;
