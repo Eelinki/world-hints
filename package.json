@@ -1,0 +1,22 @@
+{
+  "name": "worldhints",
+  "version": "0.1.0",
+  "description": "Daily game where you guess a country based on hints",
+  "license": "MIT",
+  "author": "Eelinki",
+  "type": "module",
+  "main": "src/app.js",
+  "scripts": {
+    "run": "node src/app.js",
+    "cron": "node src/cron.js",
+    "dev": "node --watch src/app.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "country-list": "^2.4.1",
+    "dotenv": "^17.2.2",
+    "openai": "^5.20.2",
+    "ryys": "^0.1.1",
+    "zod": "^3.25.76"
+  }
+}
