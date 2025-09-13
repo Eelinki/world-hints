@@ -1,11 +1,20 @@
 (function () {
-    const game = window.game;
+    const game = window.games.find(game => {
+        return new Date(game.date).getDate() === new Date().getDate()
+    });
     const guessForm = document.querySelector('.guess-form');
     const guessInput = document.querySelector('.guess-form input[type="text"]');
     const hintsList = document.querySelector('.hints-list');
     const guessesList = document.querySelector('.guesses-list');
     const winDialog = document.getElementById('win');
     let state;
+
+    document.querySelectorAll('span.game-id').forEach(elm => {
+        elm.textContent = game.id;
+    });
+    document.querySelectorAll('span.game-country').forEach(elm => {
+        elm.textContent = game.countryFull;
+    });
 
     loadState();
 
@@ -85,6 +94,7 @@
 
     function win() {
         state.won = true;
+        saveState();
         winDialog.showModal();
         document.querySelectorAll('.guess-form input').forEach(e => e.disabled = true);
     }

@@ -13,15 +13,16 @@ export default class Game {
             SELECT g.id, g.date, g.country, json_group_array(json_object('difficulty', h.difficulty, 'content', h.content)) as hints
             FROM games g
                      LEFT JOIN hints h ON g.id = h.game_id
-            WHERE g.date = date('now')
+            WHERE g.date = date('now') OR g.date = date('now', '+1 day')
             GROUP BY g.id
-            LIMIT 1
+            LIMIT 2
         `);
-        const game = query.get();
-        game.countryFull = countries.getName(game.country);
-
-        game.hints = JSON.parse(game.hints);
-        game.countries = countries.countries;
+        const games = query.all();
+        for (const game of games) {
+            game.countryFull = countries.getName(game.country);
+            game.hints = JSON.parse(game.hints);
+            game.countries = countries.countries;
+        }
 
         return new Response(200).html(`
             <!DOCTYPE html>
@@ -29,11 +30,11 @@ export default class Game {
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>World Hints #${game.id}</title>
+                <title>World Hints</title>
                 
                 <link rel="stylesheet" href="/static/styles.css" />
                 <script type="module">
-                    window.game = ${JSON.stringify(game)};
+                    window.games = ${JSON.stringify(games)};
                 </script>
                 <script src="/static/main.js" type="module" defer></script>
             </head>
@@ -41,8 +42,8 @@ export default class Game {
                 <dialog id="win">
                     <button class="close-modal square">&times;</button>
                     <h1>Nice!</h1>
-                    <h3>World Hints #${game.id}</h3>
-                    <p>Today's country was ${game.countryFull}.</p>
+                    <h3>World Hints #<span class="game-id"></span></h3>
+                    <p>Today's country was <span class="game-country"></span>.</p>
                     <p>Come back tomorrow for a new puzzle.</p>
                     <button class="share button">Share</button>
                 </dialog>
@@ -63,7 +64,7 @@ export default class Game {
                 </dialog>
                 <div class="app">
                     <header>
-                        <h1>World Hints #${game.id}</h1>
+                        <h1>World Hints #${games[0].id}</h1>
                         <div class="buttons">
                             <button class="show-settings square" data-dialog="settings">⚙</button>
                             <button class="show-info square" data-dialog="info">?</button>
