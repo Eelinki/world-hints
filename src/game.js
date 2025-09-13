@@ -21,7 +21,7 @@ export default class Game {
         game.countryFull = countries.getName(game.country);
 
         game.hints = JSON.parse(game.hints);
-        game.countries = countries;
+        game.countries = countries.countries;
 
         return new Response(200).html(`
             <!DOCTYPE html>
