@@ -1,5 +1,5 @@
 import {Response} from "ryys";
-import * as countryList from 'country-list';
+import * as countries from "./countries.js";
 
 export default class Game {
     #db;
@@ -18,11 +18,10 @@ export default class Game {
             LIMIT 1
         `);
         const game = query.get();
-        game.countryFull = countryList.getName(game.country);
+        game.countryFull = countries.getName(game.country);
 
-        const allCountries = countryList.getCodeList();
         game.hints = JSON.parse(game.hints);
-        game.countries = allCountries;
+        game.countries = countries;
 
         return new Response(200).html(`
             <!DOCTYPE html>
@@ -77,7 +76,7 @@ export default class Game {
                             <input type="text" list="country-list" />
                         </label>
                         <datalist id="country-list">
-                            ${Object.entries(allCountries).map(([_code, name]) => (
+                            ${Object.entries(countries.countries).map(([_code, name]) => (
                                 `<option value="${name}">${name}</option>`
                             )).join('\n')}
                         </datalist>

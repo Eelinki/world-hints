@@ -1,10 +1,10 @@
 import 'dotenv/config';
 import Database from "better-sqlite3";
 import process from "node:process";
-import * as countryList from 'country-list';
 import OpenAI from 'openai';
 import { zodTextFormat } from "openai/helpers/zod";
 import { z } from "zod";
+import * as countries from "./countries.js";
 
 const db = new Database('worldhints.db');
 
@@ -17,9 +17,9 @@ if (today) {
 }
 
 // create new game
-const countryCodes = Array.from(Object.keys(countryList.getCodeList()));
+const countryCodes = Array.from(countries.getCodeList());
 const randomCountryCode = countryCodes[Math.floor(Math.random() * countryCodes.length)];
-const randomCountryName = countryList.getName(randomCountryCode);
+const randomCountryName = countries.getName(randomCountryCode);
 
 const insert = db.prepare("INSERT INTO games (date, country) VALUES (date('now'), :country)");
 const gameId = insert.run({
