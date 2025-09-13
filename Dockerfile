@@ -7,6 +7,8 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+COPY .env .env
+COPY .db .db
 
 EXPOSE 3000
 
