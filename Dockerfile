@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 COPY .env .env
-COPY .db .db
+COPY worldhints.db worldhints.db
 
 EXPOSE 3000
 
