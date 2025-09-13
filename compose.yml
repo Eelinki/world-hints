@@ -2,8 +2,6 @@ services:
   app:
     build: .
     container_name: node-app
-    volumes:
-      - .:/usr/src/app
     restart: always
-    expose:
-      - "3000"
+    ports:
+      - "127.0.0.1:3000:3000"
