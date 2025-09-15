@@ -9,6 +9,11 @@
     const winDialog = document.getElementById('win');
     let state;
 
+    // sort hints by difficulty, from hard (6) to easy (1)
+    game.hints.sort((a, b) => {
+        return b.difficulty - a.difficulty
+    });
+
     document.querySelectorAll('span.game-id').forEach(elm => {
         elm.textContent = game.id;
     });

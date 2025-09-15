@@ -16,6 +16,7 @@ services:
     container_name: node-app
     volumes:
       - .:/usr/src/app
+      - ./data:/usr/src/app/data
     restart: always
     expose:
       - "3000"

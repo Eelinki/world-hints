@@ -3,7 +3,7 @@ import Game from "./game.js";
 import Database from "better-sqlite3";
 
 
-const db = new Database('worldhints.db');
+const db = new Database('./data/worldhints.db');
 
 const routes = new RegexMatch([
     ['/$', new Game(db)],

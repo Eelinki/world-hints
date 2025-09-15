@@ -6,7 +6,7 @@ import { zodTextFormat } from "openai/helpers/zod";
 import { z } from "zod";
 import * as countries from "./countries.js";
 
-const db = new Database('worldhints.db');
+const db = new Database('./data/worldhints.db');
 
 // select today's game
 const today = db.prepare("SELECT id FROM games WHERE date = date('now')").get();
