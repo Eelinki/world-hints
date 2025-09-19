@@ -37,6 +37,7 @@ export default class Game {
                     window.games = ${JSON.stringify(games)};
                 </script>
                 <script src="/static/main.js" type="module" defer></script>
+                <script src="https://kovadata.fi/static/js/tracker.js?1758289636" data-kovadata-id="2" defer>
             </head>
             <body>
                 <dialog id="win">
